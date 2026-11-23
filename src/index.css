@@ -1,1 +1,53 @@
 @import "tailwindcss";
+
+/* Shared brand colours and typography. */
+@theme {
+  --color-brand-950: #061833;
+  --color-brand-900: #0b2447;
+  --color-brand-800: #12336a;
+  --color-brand-700: #1a4690;
+  --color-brand-600: #2259b5;
+  --color-brand-500: #3a74d6;
+  --color-brand-100: #e3ecfa;
+  --color-brand-50: #f2f6fd;
+  --color-accent-500: #00a3e0;
+  --color-accent-100: #d9f3fc;
+  --color-gold-500: #e8a33d;
+
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Apple SD Gothic Neo", "Malgun Gothic",
+    "Noto Sans", "Noto Sans SC", "Noto Sans KR", sans-serif;
+}
+
+html,
+body {
+  background: #f4f6fa;
+  color: #0f172a;
+}
+
+/* Component classes sit in the components layer so utility classes (pl-10, px-3…) can override them. */
+@layer components {
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+}
+
+.input {
+  @apply w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-[15px] text-slate-900 shadow-sm placeholder:text-slate-400 transition outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-100;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-50 outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+}
+.btn-primary {
+  @apply bg-brand-700 text-white shadow-sm hover:bg-brand-800;
+}
+.btn-secondary {
+  @apply border border-slate-300 bg-white text-slate-700 hover:bg-slate-50;
+}
+.btn-ghost {
+  @apply text-slate-600 hover:bg-slate-100;
+}
+.card {
+  @apply rounded-2xl border border-slate-200 bg-white shadow-sm;
+}
+}
