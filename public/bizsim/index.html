@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BizSim: The Entrepreneur's Journey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="lang-toggle">
+            <button class="lang-btn active" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="zh">中文</button>
+            <button class="lang-btn" data-lang="ko">한국어</button>
+        </div>
+        <!-- Landing Page -->
+        <section id="landing-page" class="screen active">
+            <div class="glass-panel hero-panel">
+                <h1>BizSim <span class="accent">Tycoon</span></h1>
+                <p class="subtitle">Can you build the ultimate business empire?</p>
+
+                <form id="setup-form">
+                    <div class="input-group">
+                        <label for="business-name">Business Name</label>
+                        <input type="text" id="business-name" placeholder="e.g. Quantum Coffee" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="product-type">Main Product</label>
+                        <input type="text" id="product-type" placeholder="e.g. Holographic Sneakers" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="founder-name">Founder Name</label>
+                        <input type="text" id="founder-name" placeholder="Your Name" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Start Your Journey</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Game Loop -->
+        <!-- Game Loop -->
+        <section id="game-screen" class="screen hidden">
+            <div class="stats-bar">
+                <div class="stat-box">
+                    <span class="label">Profit/Loss</span>
+                    <span id="profit-display" class="value">RM 0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="label">Turn</span>
+                    <span id="turn-display" class="value">1/30</span>
+                </div>
+                <div class="stat-box market-box">
+                    <span class="label">Market</span>
+                    <span id="market-display" class="value">Stable</span>
+                </div>
+            </div>
+
+            <div class="game-content">
+                <!-- Scenario View -->
+                <div id="scenario-container" class="active-view">
+                    <div class="glass-panel scenario-card">
+                        <h2 id="scenario-title">Scenario #1</h2>
+                        <p id="scenario-text">Loading scenario...</p>
+                        <div id="options-container" class="options-grid">
+                            <!-- Options injected here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dice Roll View -->
+                <div id="dice-container" class="hidden-view">
+                    <div class="glass-panel center-content">
+                        <h2>Monthly Sales Report</h2>
+                        <p>Time to see how the market responds!</p>
+                        <div class="dice-wrapper">
+                            <div id="dice" class="dice">
+                                <div class="face front">1</div>
+                                <div class="face back">6</div>
+                                <div class="face right">3</div>
+                                <div class="face left">4</div>
+                                <div class="face top">5</div>
+                                <div class="face bottom">2</div>
+                            </div>
+                        </div>
+                        <button id="roll-btn" class="btn-primary">Roll for Sales</button>
+                        <div id="sales-result" class="result-text hidden"></div>
+                        <button id="continue-after-dice" class="btn-primary hidden">Continue</button>
+                    </div>
+                </div>
+
+                <!-- Hiring View -->
+                <div id="hiring-container" class="hidden-view">
+                    <div class="hiring-header">
+                        <h2 class="hiring-title">Expand Your Team</h2>
+                        <p class="hiring-subtitle">Choose a new team member to join <span id="biz-name-span"></span></p>
+                    </div>
+                    <div id="hiring-options" class="hiring-grid">
+                        <!-- Hiring cards injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="shop-btn" class="action-btn secondary-btn">Shop</button>
+            </div>
+        </section>
+
+        <!-- Shop Modal -->
+        <div id="shop-modal" class="modal hidden">
+            <div class="modal-content glass-panel">
+                <div class="modal-header">
+                    <h2>Office Upgrades</h2>
+                    <button id="close-shop-btn" class="close-btn">&times;</button>
+                </div>
+                <div id="shop-items" class="shop-grid">
+                    <!-- Shop items injected here -->
+                </div>
+            </div>
+        </div>
+        <!-- End Screen -->
+        <section id="end-screen" class="screen hidden">
+            <div class="glass-panel result-panel">
+                <h2>Game Over!</h2>
+                <h3 id="end-biz-name" class="accent"></h3>
+                <div id="tycoon-rank" class="rank-display"></div>
+
+                <div class="final-score-box">
+                    <span class="label">Final Profit</span>
+                    <span id="final-profit" class="value big-text">RM 0</span>
+                </div>
+
+                <div class="feedback-section">
+                    <div class="feedback-item">
+                        <p id="scenario-feedback"></p>
+                    </div>
+                    <div class="feedback-item">
+                        <p id="hiring-feedback"></p>
+                    </div>
+                </div>
+
+                <p id="performance-text" class="hidden">Not bad for a start!</p>
+                <div id="history-list" class="history-scroll">
+                    <!-- History items -->
+                </div>
+                <button id="restart-btn" class="btn-primary">Play Again</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Roulette Modal -->
+    <div id="roulette-modal" class="modal hidden">
+        <div class="modal-content roulette-content">
+            <h2 id="roulette-title">Market Volatility!</h2>
+            <p id="roulette-desc">The market is unstable! Spin the wheel to test your luck.</p>
+
+            <div class="roulette-wheel-container">
+                <div id="roulette-wheel" class="roulette-wheel">
+                    <!-- Wheel segments will be CSS/JS generated or simple image -->
+                    <div class="wheel-inner"></div>
+                </div>
+                <div id="roulette-marker">▼</div>
+            </div>
+
+            <div class="roulette-bet-area">
+                <button id="bet-red-btn" class="btn-roulette btn-red">Bet Red</button>
+                <button id="bet-black-btn" class="btn-roulette btn-black">Bet Black</button>
+            </div>
+
+            <div id="roulette-result" class="hidden">
+                <p id="roulette-result-text"></p>
+                <button id="roulette-continue-btn" class="btn-primary hidden">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script_v2.js"></script>
+</body>
+
+</html>
